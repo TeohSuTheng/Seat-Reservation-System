@@ -1,5 +1,5 @@
 <?php
-include_once 'Includes/dbh.inc.php';
+include_once 'includes/dbh.inc.php';
 ?>
 
 <!DOCTYPE html>
@@ -26,13 +26,14 @@ include_once 'Includes/dbh.inc.php';
                  $occupied = array();   //store occupied seats
                  
                 //SELECT FROM DB : occupied seats
-                 $sql = "SELECT * FROM temp;"; //WHERE userId = 1..
-                 $result = mysqli_query($conn, $sql);
-                $resultCheck = mysqli_num_rows($result);
+                $query = "SELECT * FROM temp;"; //WHERE userId = 1..
+                $result = mysqli_query($conn, $query) or die("Error in query:$query.".mysqli_error());
         
-                if($resultCheck > 0){
+                if(mysqli_num_rows($result) > 0)
+                {
                     echo 'Seats occupied: ';
-                    while($row = mysqli_fetch_assoc($result)){
+                    while($row = mysqli_fetch_assoc($result))
+                    {
                         //to fetch all results frm $result 
                         //insert data to $row in array
                         // ['username'-> 'a,b', 'userAge -> 23,23 ....]
@@ -40,11 +41,11 @@ include_once 'Includes/dbh.inc.php';
                         $occupied[]=$row['seat'];
                     }
                     
-        }
+                }
         
-            //display form
+                //display form
              ?>
-        <br>
+            <br>
                 <h4>Please select your seat(s):</h4>
                 <br><br>
                 
@@ -103,12 +104,12 @@ include_once 'Includes/dbh.inc.php';
                             </tr>
                             <tr>
                                 <td><div class="container-item">
-                                    <input type="checkbox" name="seat[]" value="B1"/>
+                                    <input type="checkbox" name="seat[]" value="C1"/>
                                     <label for="C1"> C1</label> 
                                     </div></td>
 
                                     <td><div class="container-item">
-                                    <input type="checkbox" name="seat[]" value="B2"/> 
+                                    <input type="checkbox" name="seat[]" value="C2"/> 
                                      <label for="C2"> C2</label> 
                                     </div></td>
                                     
@@ -117,43 +118,43 @@ include_once 'Includes/dbh.inc.php';
                                     </td>
                                     
                                     <td><div class="container-item">
-                                    <input type="checkbox" name="seat[]" value="B3"/> 
+                                    <input type="checkbox" name="seat[]" value="C3"/> 
                                     <label for="C3"> C3</label> 
                                     </div></td>
                             </tr>
                             <tr>
                                 <td><div class="container-item">
-                                    <input type="checkbox" name="seat[]" value="B1"/>
+                                    <input type="checkbox" name="seat[]" value="D1"/>
                                     <label for="D1"> D1</label> 
                                     </div></td>
 
                                     <td><div class="container-item">
-                                    <input type="checkbox" name="seat[]" value="B2"/> 
+                                    <input type="checkbox" name="seat[]" value="D2"/> 
                                      <label for="D2"> D2</label> 
                                     </div></td>
                                     
                                     <td></td>
 
                                     <td><div class="container-item">
-                                    <input type="checkbox" name="seat[]" value="B3"/> 
+                                    <input type="checkbox" name="seat[]" value="D3"/> 
                                     <label for="D3"> D3</label> 
                                     </div></td>
                             </tr>
                             <tr>
                                 <td><div class="container-item">
-                                    <input type="checkbox" name="seat[]" value="B1"/>
+                                    <input type="checkbox" name="seat[]" value="E1"/>
                                     <label for="E1"> E1</label> 
                                     </div></td>
 
                                     <td><div class="container-item">
-                                    <input type="checkbox" name="seat[]" value="B2"/> 
+                                    <input type="checkbox" name="seat[]" value="E2"/> 
                                      <label for="E2"> E2</label> 
                                     </div></td>
                                     
                                     <td></td>
 
                                     <td><div class="container-item">
-                                    <input type="checkbox" name="seat[]" value="B3"/> 
+                                    <input type="checkbox" name="seat[]" value="E3"/> 
                                     <label for="E3"> E3</label> 
                                     </div></td>
                             </tr>
@@ -168,7 +169,10 @@ include_once 'Includes/dbh.inc.php';
                 </form>
                 </div>
                 <?php
+                     mysqli_free_result($result);
+                     mysqli_close($conn);
                 }  
+               
                 ?>
                     
 

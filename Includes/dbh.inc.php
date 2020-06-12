@@ -5,10 +5,8 @@ $username = "root";
 $password = "";
 $dbName = "seat_reservation";
 
-$conn =new mysqli($servername, $username, $password, $dbName);
+$conn = mysqli_connect($servername, $username, $password, $dbName) or die ('Unable to connect.');
         
-//check connection
-if($conn->connect_error){
-    die ("connection fail".$conn->connect_error);
-}
+
+?>
 
